@@ -2,7 +2,8 @@
 
 This repository contains a sample script which will run accessibility test on a webpage
 The script uses the axe-core library from https://www.deque.com/axe/
-It applied the wcag2aa standard to determine the accessiblity issues on the web page
+API reference: https://github.com/dequelabs/axe-core/blob/develop/doc/API.md#section-2-api-reference
+It applies the wcag2aa standard to determine the accessiblity issues on the web page
 
 
 ## Running Sample test
