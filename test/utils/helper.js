@@ -7,12 +7,44 @@ function runAccessibilityTest(fileName) {
     fileName = fileName.split('.')[0] + '_' + getDateTime() + '.csv'
     browser.execute(axeSource)
     const options = { runOnly: { type: 'tag', values: ['wcag2aa'] } }
-    let results = browser.executeAsync(function (options, done) {
-        axe.run((err, results) => {
+    let results = browser.executeAsync(function (done) {
+        axe.run(
+            {
+                runOnly: {
+                    type: 'tag',
+                    values: ['wcag2a', 'wcag2aa', 'best-practice']
+                }
+            }, (err, results) => {
+                if (err) done(err)
+                done(results)
+            })
+    })
+
+    /* to run the test on a indivdual element
+    // Argumemt - elem needs to be passed from the calling test
+    function runAccessibilityTest(fileName, elem) {
+    const fileDelimiter = ','
+    fileName = fileName.split('.')[0] + '_' + getDateTime() + '.csv'
+    browser.execute(axeSource);
+    // const options = { runOnly: { type: 'tag', values: ['wcag2aa'] } }
+    const elemToTest = elem.selector
+
+    let results = browser.executeAsync(function (elemToTest,done) {
+        axe.run(
+            { 
+                runOnly: 
+                { 
+                    type: 'tag', 
+                    values: ['wcag2a', 'wcag2aa', 'best-practice'] 
+                },
+                include :[[elemToTest]]
+            }, 
+            (err, results) => {
             if (err) done(err)
             done(results)
         })
-    }, options)
+    }, elemToTest)
+    */
 
     var violationsToWrite = []
 
